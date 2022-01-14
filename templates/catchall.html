@@ -5,11 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{url_for('static', filename = 'styles.css')}}">
-  <title>Home - JGE Flask Site</title>
+  <title>Error - JGE Flask Site</title>
 </head>
 <body>
-  <img src="{{url_for('static', filename = 'logo.jpeg')}}" alt="Flask logo">
-  <h1>Welcome!</h1>
-  <p>By creating this beautiful website, I'll learn about Flask, the popular Python microframework.</p>
+  <h1>Uh-oh!</h1>
+  <p>Sorry, but the page "{{ path }}" doesn't exist on this website.</p>
 </body>
 </html>

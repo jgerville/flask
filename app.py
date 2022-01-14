@@ -13,7 +13,7 @@ def about():
 
 @app.route("/<other>")
 def catchall(other):
-  return "Sorry, there isn't any page named {}!".format(other)
+  return render_template("catchall.html", path = other)
 
 if __name__ == "__main__":
   app.run(port=5000, debug=True)
