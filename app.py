@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 
 app = Flask(__name__)
 
@@ -9,9 +9,9 @@ route_bullets = [
 ]
 
 jinja_bullets = [
-  {"id": 1, "text": "To get a static asset URL, much like Rails, we use: {% raw %}url_for('static', filename = 'xyz.abc'){% endraw %}"},
-  {"id": 2, "text": "Unlike with ERB, we need something special to end for loops: {% raw %}{% endfor %}{% endraw %}"},
-  {"id": 3, "text": "To end if blocks, we need {% raw %}{% endif %}{% endraw %}"},
+  {"id": 4, "text": "To get a static asset URL, much like Rails, we use: {% raw %}url_for('static', filename = 'xyz.abc'){% endraw %}"},
+  {"id": 5, "text": "Unlike with ERB, we need something special to end for loops: {% raw %}{% endfor %}{% endraw %}"},
+  {"id": 6, "text": "To end if blocks, we need {% raw %}{% endif %}{% endraw %}"},
 ]
 
 @app.route("/")
@@ -22,6 +22,15 @@ def home():
 @app.route("/about")
 def about():
   return render_template("about.html", route_bullets = route_bullets, jinja_bullets = jinja_bullets)
+
+@app.route("/bullets/<int:num>")
+def bullet(num):
+  resp = next((item["text"] for item in route_bullets if item["id"] == num ), None)
+  if resp is None:
+    resp = next((item["text"] for item in jinja_bullets if item["id"] == num ), None)
+    if resp is None:
+      abort(404, description="Sorry, this bullet point doesn't exist.")
+  return resp
 
 @app.route("/<other>")
 def catchall(other):
