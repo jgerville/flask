@@ -3,16 +3,16 @@ from flask import Flask
 app = Flask(__name__)
 
 @app.route("/")
-def hello():
-  return "<h1>heyyyyy</h1>"
+def home():
+  return "Learn to play Go"
 
-@app.route("/<my_name>")
-def greet(my_name):
-  return "<h2>{}, did you know about the recursion joke?</h2>".format(my_name) * 20
+@app.route("/about")
+def about():
+  return "This is a tiny little website that I'm creating in order to get familiar with Flask!"
 
-@app.route("/test")
-def figure_out():
-  return "do we get this or the dynamic route?"
+@app.route("/<other>")
+def catchall(other):
+  return "Sorry, there isn't any page named {}!".format(other)
 
 if __name__ == "__main__":
   app.run(port=5000, debug=True)
