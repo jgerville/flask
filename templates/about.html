@@ -1,19 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{url_for('static', filename = 'styles.css')}}">
-  <title>About - JGE Flask Site</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}
+  About - JGE Flask Site
+{% endblock %}
+
+{% block content %}
   <h1>A few things I've noticed</h1>
+  <h2>Routes / Views</h2>
   <ul>
-    <li>Unlike with MVC frameworks, in Flask views refer to routes</li>
-    <li>You can use more than 1 route decorator with a view</li>
-    <li>So far, setting up routes is very simple, and similar to Express</li>
-    <li>To get a static asset URL, much like Rails, we use url_for('static', filename = 'xyz.abc')</li>
+    {% for item in route_bullets %}
+      <li>{{ item.text }}</li>
+    {% endfor %}
   </ul>
-</body>
-</html>
+  
+  <h2>Templates / Jinja2</h2>
+  <ul>
+    {% for item in jinja_bullets %}
+      <li>{{item.text}}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

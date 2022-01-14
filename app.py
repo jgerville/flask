@@ -2,6 +2,18 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+route_bullets = [
+  {"id": 1, "text": "Unlike with MVC frameworks, in Flask views refer to routes"},
+  {"id": 2, "text": "You can use more than 1 route decorator with a view"},
+  {"id": 3, "text": "So far, setting up routes is very simple, and similar to Express"},
+]
+
+jinja_bullets = [
+  {"id": 1, "text": "To get a static asset URL, much like Rails, we use: {% raw %}url_for('static', filename = 'xyz.abc'){% endraw %}"},
+  {"id": 2, "text": "Unlike with ERB, we need something special to end for loops: {% raw %}{% endfor %}{% endraw %}"},
+  {"id": 3, "text": "To end if blocks, we need {% raw %}{% endif %}{% endraw %}"},
+]
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -9,7 +21,7 @@ def home():
 
 @app.route("/about")
 def about():
-  return render_template("about.html")
+  return render_template("about.html", route_bullets = route_bullets, jinja_bullets = jinja_bullets)
 
 @app.route("/<other>")
 def catchall(other):
